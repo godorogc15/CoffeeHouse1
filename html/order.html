@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+   <nav class="navbar">
+  <div class="logo">CoffeeHouse</div>
+
+  <div class="links">
+    <a href="index.html">Home</a>
+    <a href="menu.html">Meniu</a>
+    <a href="order.html">Comandă</a>
+    <a href="contact.html">Contact</a>
+    <a href="login.html">Logare</a>
+    <a href="signup.html">Inregistrare</a>
+  </div>
+</nav>
+<div class="hero">Savureaza cea mai buna cafea alaturi de noi</div>
+<div class="container">
+
+<h2>Comandă</h2>
+
+<input placeholder="Nume">
+<input placeholder="Prenume">
+
+<select id="delivery" onchange="delivery()">
+<option>Ridicare</option>
+<option>Livrare</option>
+</select>
+
+<div id="addr" style="display:none;">
+<input placeholder="Adresă">
+</div>
+
+<select>
+<option>Cash</option>
+<option>Card</option>
+</select>
+
+<select>
+<option value="">Alege produsul</option>
+
+<optgroup label="Hot Drinks">
+<option>Espresso - 25 lei</option>
+<option>Americano - 28 lei</option>
+<option>Cappuccino - 35 lei</option>
+<option>Latte - 40 lei</option>
+<option>Macchiato - 30 lei</option>
+</optgroup>
+
+<optgroup label="Cold Drinks">
+<option>Iced Coffee - 35 lei</option>
+<option>Iced Latte - 40 lei</option>
+<option>Cold Brew - 42 lei</option>
+<option>Frappe - 45 lei</option>
+</optgroup>
+
+<optgroup label="Special">
+<option>Ciocolată caldă - 30 lei</option>
+<option>Mocha - 42 lei</option>
+<option>Latte cu caramel - 43 lei</option>
+<option>Latte cu vanilie - 43 lei</option>
+</optgroup>
+
+<optgroup label="Desserts">
+<option>Cheesecake - 45 lei</option>
+<option>Brownie - 30 lei</option>
+<option>Tiramisu - 50 lei</option>
+<option>Croissant - 20 lei</option>
+</optgroup>
+
+<optgroup label="Snacks">
+<option>Sandwich - 25 lei</option>
+<option>Toast - 20 lei</option>
+<option>Wrap - 30 lei</option>
+</optgroup>
+
+</select>
+
+<button class="btn" onclick="send()">Trimite</button>
+
+</div>
+
+<footer>CoffeeHouse</footer>
+<script src="../js/script.js"></script>
+
+</body>
+</html>
