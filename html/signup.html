@@ -5,7 +5,7 @@
 </head>
 <body>
 
-    <nav class="navbar">
+  <nav class="navbar">
   <div class="logo">CoffeeHouse</div>
 
   <div class="links">
@@ -13,8 +13,13 @@
     <a href="menu.html">Meniu</a>
     <a href="order.html">Comandă</a>
     <a href="contact.html">Contact</a>
-    <a href="login.html">Logare</a>
-    <a href="signup.html">Inregistrare</a>
+
+    <a href="login.html" id="loginLink">Logare</a>
+    <a href="signup.html" id="signupLink">Înregistrare</a>
+
+    <button onclick="logout()" id="logoutBtn" class="btn" style="display:none">
+      Logout
+    </button>
   </div>
 </nav>
 
@@ -33,7 +38,8 @@
 
 </div>
 
-<footer>CoffeeHouse</footer>
+<footer>© 2026 CoffeeHouse Strada Ștefan cel Mare și Sfânt 128, Chișinău</footer>
+
 <script src="../js/script.js"></script>
 
 </body>

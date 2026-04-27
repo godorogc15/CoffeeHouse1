@@ -5,7 +5,7 @@
 </head>
 <body>
 
-   <nav class="navbar">
+<nav class="navbar">
   <div class="logo">CoffeeHouse</div>
 
   <div class="links">
@@ -13,10 +13,16 @@
     <a href="menu.html">Meniu</a>
     <a href="order.html">Comandă</a>
     <a href="contact.html">Contact</a>
-    <a href="login.html">Logare</a>
-    <a href="signup.html">Inregistrare</a>
+
+    <a href="login.html" id="loginLink">Logare</a>
+    <a href="signup.html" id="signupLink">Înregistrare</a>
+
+    <button onclick="logout()" id="logoutBtn" class="btn" style="display:none">
+      Logout
+    </button>
   </div>
 </nav>
+
 <div class="hero">Savureaza cea mai buna cafea alaturi de noi</div>
 <div class="container">
 
@@ -34,44 +40,58 @@
 <input placeholder="Adresă">
 </div>
 
-<select>
-<option>Cash</option>
-<option>Card</option>
+<select id="paymentMethod" onchange="toggleCardSection()">
+    <option value="">Alege metoda de plată</option>
+    <option value="cash">Cash</option>
+    <option value="card">Card</option>
 </select>
 
-<select>
-<option value="">Alege produsul</option>
+<div id="cardSection" class="card-section">
+    <input type="text" id="cardNumber" placeholder="Număr card">
+    <input type="text" id="cardName" placeholder="Nume titular">
+    <input type="text" id="cardExpiry" placeholder="MM/YY">
+    <input type="text" id="cardCVV" placeholder="CVV">
+</div>
 
-<optgroup label="Hot Drinks">
+<select>
+<option value="">Băutură fierbinți</option>
 <option>Espresso - 25 lei</option>
 <option>Americano - 28 lei</option>
 <option>Cappuccino - 35 lei</option>
 <option>Latte - 40 lei</option>
 <option>Macchiato - 30 lei</option>
 </optgroup>
+</select>
 
-<optgroup label="Cold Drinks">
+<select>
+<option value="">Băuturi reci</option>
 <option>Iced Coffee - 35 lei</option>
 <option>Iced Latte - 40 lei</option>
 <option>Cold Brew - 42 lei</option>
 <option>Frappe - 45 lei</option>
 </optgroup>
+</select>
 
-<optgroup label="Special">
+<select>
+<option value="">Băuturi speciale</option>
 <option>Ciocolată caldă - 30 lei</option>
 <option>Mocha - 42 lei</option>
 <option>Latte cu caramel - 43 lei</option>
 <option>Latte cu vanilie - 43 lei</option>
 </optgroup>
+</select>
 
-<optgroup label="Desserts">
+<select>
+<option value="">Deserturi</option>
 <option>Cheesecake - 45 lei</option>
 <option>Brownie - 30 lei</option>
 <option>Tiramisu - 50 lei</option>
 <option>Croissant - 20 lei</option>
 </optgroup>
+</select>
 
-<optgroup label="Snacks">
+<select>
+<option value="">Gustări</option>
 <option>Sandwich - 25 lei</option>
 <option>Toast - 20 lei</option>
 <option>Wrap - 30 lei</option>
@@ -79,11 +99,12 @@
 
 </select>
 
-<button class="btn" onclick="send()">Trimite</button>
+<button onclick ="send()" class="btn">Trimite</button>
 
 </div>
 
-<footer>CoffeeHouse</footer>
+<footer>© 2026 CoffeeHouse Strada Ștefan cel Mare și Sfânt 128, Chișinău</footer>
+
 <script src="../js/script.js"></script>
 
 </body>

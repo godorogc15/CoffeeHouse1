@@ -4,8 +4,55 @@ const g=id=>document.getElementById(id)
 const v=id=>g(id)?.value?.trim()||""
 
 let users=JSON.parse(localStorage.getItem("users"))||[]
-
 const save=()=>localStorage.setItem("users",JSON.stringify(users))
+
+let cart=[]
+
+const protectPages=()=>{
+
+const user=JSON.parse(localStorage.getItem("currentUser"))
+const page=location.pathname.split("/").pop()
+
+const allowed=[
+"login.html",
+"signup.html",
+"password.html"
+]
+
+if(!user && !allowed.includes(page)){
+location="login.html"
+}
+}
+
+protectPages()
+
+const updateAuthUI=()=>{
+
+const user=JSON.parse(localStorage.getItem("currentUser"))
+
+const login=g("loginLink")
+const signup=g("signupLink")
+const logout=g("logoutBtn")
+
+if(user){
+if(login) login.style.display="none"
+if(signup) signup.style.display="none"
+if(logout) logout.style.display="inline-block"
+}else{
+if(login) login.style.display="inline-block"
+if(signup) signup.style.display="inline-block"
+if(logout) logout.style.display="none"
+}
+}
+
+window.logout=()=>{
+
+localStorage.removeItem("currentUser")
+updateAuthUI()
+location="login.html"
+}
+
+updateAuthUI()
 
 window.register=()=>{
 
@@ -25,8 +72,8 @@ return alert("Completeaza toate campurile")
 if(!user.e.includes("@"))
 return alert("Email invalid")
 
-if(!/^\d+$/.test(user.t))
-return alert("Numar telefon doar cifre")
+if(!/^(\+373|0)\d{8}$/.test(user.t))
+return alert("Numar de telefon invalid")
 
 if(user.pw.length<8)
 return alert("Parola minim 8 caractere")
@@ -40,7 +87,10 @@ return alert("Email deja existent")
 users.push(user)
 save()
 
-location="login.html"
+localStorage.setItem("currentUser",JSON.stringify(user))
+updateAuthUI()
+
+location="index.html"
 }
 
 window.login=()=>{
@@ -52,7 +102,8 @@ let ok=users.find(u=>u.e===e && u.pw===pw)
 
 if(ok){
 localStorage.setItem("currentUser",JSON.stringify(ok))
-location="home.html"
+updateAuthUI()
+location="index.html"
 }else{
 alert("Date incorecte")
 }
@@ -97,10 +148,7 @@ let products=g("products")
 if(products){
 
 fetch("../json/products.json")
-.then(r=>{
-if(!r.ok) throw new Error("JSON nu exista")
-return r.json()
-})
+.then(r=>r.json())
 .then(data=>{
 
 products.innerHTML=""
@@ -121,10 +169,6 @@ products.appendChild(card)
 })
 
 })
-.catch(err=>{
-products.innerHTML="Eroare la incarcare meniu"
-console.log(err)
-})
 
 }
 
@@ -138,11 +182,61 @@ if(!d||!a)return
 a.style.display=d.value==="Livrare"?"block":"none"
 }
 
+window.toggleCardSection=()=>{
+
+const method=g("paymentMethod")?.value
+const cardSection=g("cardSection")
+
+if(!cardSection) return
+
+cardSection.style.display=method==="card"?"block":"none"
+}
+
+window.validateCard=()=>{
+
+const number=v("cardNumber")
+const name=v("cardName")
+const expiry=v("cardExpiry")
+const cvv=v("cardCVV")
+const error=g("error")
+
+if(!error) return false
+
+error.textContent=""
+
+if(!number||!name||!expiry||!cvv){
+error.textContent="Completează toate câmpurile cardului"
+return false
+}
+
+if(!/^\d{16}$/.test(number)){
+error.textContent="Număr card invalid"
+return false
+}
+
+if(name.length<3){
+error.textContent="Nume titular invalid"
+return false
+}
+
+if(!/^\d{3}$/.test(cvv)){
+error.textContent="CVV invalid"
+return false
+}
+
+if(!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiry)){
+error.textContent="Dată expirare invalidă"
+return false
+}
+
+alert("Plata validată")
+return true
+}
+
 window.send=()=>{
 
 document.querySelector(".container").innerHTML=
-"<h2>Comanda trimisa ☕</h2><p>Multumim!</p>"
-
+"<h2>Comanda trimisă</h2><p>Mulțumim!</p>"
 }
 
 })
